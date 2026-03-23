@@ -1,0 +1,23 @@
+services:
+
+  mongodb:
+    image: mongo
+    container_name: profile_mongo
+    ports:
+      - "27017:27017"
+
+  backend:
+    build: ./backend
+    container_name: profile_backend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongodb
+
+  frontend:
+    build: ./frontend
+    container_name: profile_frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend

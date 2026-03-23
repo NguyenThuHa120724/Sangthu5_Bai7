@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Profile</title>
+</head>
+
+<body>
+
+    <h2>Profile Form</h2>
+
+    <input id="name" placeholder="Name">
+    <input id="email" placeholder="Email">
+
+    <button onclick="save()">Save</button>
+
+    <ul id="list"></ul>
+
+    <script>
+        function save() {
+
+            fetch("http://localhost:8080/api/profile", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: document.getElementById("name").value,
+                    email: document.getElementById("email").value
+                })
+            }).then(load)
+
+        }
+
+        function load() {
+
+            fetch("http://localhost:8080/api/profile")
+                .then(res => res.json())
+                .then(data => {
+
+                    let html = ""
+
+                    data.forEach(p => {
+                        html += "<li>" + p.name + " - " + p.email + "</li>"
+                    })
+
+                    document.getElementById("list").innerHTML = html
+
+                })
+
+        }
+
+        load()
+    </script>
+
+</body>
+
+</html>
