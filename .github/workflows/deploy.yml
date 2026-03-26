@@ -20,8 +20,8 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          # Kiểm tra: nếu Dockerfile nằm trong thư mục 'backend' thì sửa thành ./backend
-          context: . 
+          # Đã sửa: Trỏ vào thư mục backend nơi chứa Dockerfile của bạn
+          context: ./backend 
           push: true
           tags: nguyenthuha0786/sangthu5_bai7:latest
 
